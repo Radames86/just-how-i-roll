@@ -216,25 +216,61 @@ function getMedian(arr){
 }
 console.log(getMedian([1, 2, 3]))
 
-function getMode(arr){
-  if(arr.length === 0) return 'NA'
+// function getMode(arr){
+//   if(arr.length === 0) return 'NA'
 
-  const frequency = {}
-  let maxFreq = 0
-  let mode = []
+//   const frequency = {}
+//   let maxFreq = 0
+//   let mode = []
    
-  for(let num of arr){
-    frequency[num] = (frequency[num] || 0) + 1
-    if(frequency[num] > maxFreq) {
-      maxFreq = frequency[num]
-    }
-  }
+//   for(let num of arr){
+//     frequency[num] = (frequency[num] || 0) + 1
+//     if(frequency[num] > maxFreq) {
+//       maxFreq = frequency[num]
+//     }
+//   }
 
-  for(let num in frequency){
-    if(frequency[num] === maxFreq){
-      mode.push(Number(num))
+//   for(let num in frequency){
+//     if(frequency[num] === maxFreq){
+//       mode.push(Number(num))
+//     }
+//   }
+//   return mode.length === Object.keys(frequency).length ? 'NA' : mode.join(', ')
+// }
+
+
+function getMode(arr){
+  const hash = {}
+  for(let num of arr){
+    console.log(hash[num])
+    if(hash[num] === undefined){
+      hash[num] = 1
+    }else{
+      hash[num] ++
+    }
+    
+  }
+  // look for the biggest number, return the key of that count
+  //{
+  //  1: 20,
+  //  2: 14,
+  //  3: 22,
+  //  4: 18,
+  //  5: 10,
+  //  6: 12,
+  //}
+
+  let biggest = 0
+  for(let key in hash){
+    // how to access the value we're on?
+    if(hash[key] > biggest){
+      biggest = hash[key]
+    }
+  } 
+  for(let key in hash){
+    if(hash[key] === biggest){
+      return key
     }
   }
-  return mode.length === Object.keys(frequency).length ? 'NA' : mode.join(', ')
 }
-console.log(getMode([1, 2, 2, 3]))
+getMode([1, 2, 2, 3])
